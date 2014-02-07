@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- facebook id code 188034641407038-->
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">		
+		<link rel="stylesheet" type="text/css" href="css/responsive.css">		
+
+		<link rel="stylesheet" type="text/css" href="css/slidecontent.css">
+		<script type="text/javascript" src="js/jquery.js"></script>
+
+<script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+
+	<script>document.documentElement.className = 'js';</script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.5">
+	<!-- Force latest IE rendering engine & Chrome Frame -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<!-- Make IE recognise HTML5 elements for styling -->
+	<!--[if lte IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	</head>
+	<body>
+		<div class="wraper">
+			<div class="content">
+				<div id="mycarousel" class="everslider">
+					<div id="button-right" class="hidden-button">
+					</div>
+					<ul class="es-slide" id="slide-container">
+						<li class="item-slide active">
+							<a class="item-info" data-info="info-uno">							
+								<div class="caption">
+									algun título
+								</div>
+								<img src="images/300_1.png">
+							</a>								
+						</li>
+						<li class="item-slide">
+							<a class="item-info" data-info="info-dos">							
+								<div class="caption">
+									algun título
+								</div>
+								<img src="images/300_2.png">
+							</a>
+						</li>
+						<li class="item-slide">
+							<a class="item-info" data-info="info-tres">
+								<div class="caption">
+									algun título
+								</div>
+								<img src="images/300_3.png">
+							</a>
+						</li>
+						<li class="item-slide">
+							<a class="item-info" data-info="info-cuatro">							
+								<div class="caption">
+									algun título
+								</div>
+								<img src="images/300_4.png">
+							</a>
+						</li>
+						<li class="item-slide">
+							<a class="item-info" data-info="info-cinco">							
+								<div class="caption">
+									algun título
+								</div>
+								<img src="images/300_5.png">
+							</a>
+						</li>
+						<li class="item-slide">
+							<a class="item-info" data-info="info-seis">
+								<div class="caption">
+									algun título
+								</div>
+								<img src="images/300_6.png">
+							</a>
+						</li>
+					</ul>
+					<div id="button-left" class="hidden-button">
+					</div>
+					<div id="carousel-info">
+						<div class="content-carousel info-uno" id="info-uno">
+							<h2>title menu</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	<script type="text/javascript">
+
+			var width;
+			var height;
+
+
+			var width =  $(window).width();
+			var height = $(window).height();
+
+			console.log(width);
+
+			var item = $('.item-slide').length;
+			
+			var divide  = parseInt(width / item);			
+			var item_size = $(item).width(divide);		
+			var slide_size = parseInt(divide*item );
+			
+			$('#slide-container').width(slide_size+'px');
+			$('#mycarousel').width(divide+'px');
+			$('.item-slide').width(divide+'px');			
+			
+			function resize(){
+				$(window).resize(function(e){
+
+					var width = $(window).width();
+					var height = $(window).width();
+					var divide = parseInt(width/item);
+					var item_size = $(item).width(divide);		
+					var slide_size = parseInt(divide*item );
+
+
+					$('#slide-container').width(slide_size+'px');
+					$('#mycarousel').width(divide+'px');
+					$('.item-slide').width(divide+'px');	
+
+				});
+			}
+
+
+			resize();
+
+			function slider(){
+				realState = 1;
+				numItem = item;
+				size = $('.item-slide').width(divide+'px');			
+
+				slider = $('#slide-container');
+				sliderWidht = $(numItem[0]).outerWidth(true);
+				howSlide = parseInt($(slider).width()/size);
+
+				function next(){
+					realState++;
+					$(slider).stop().animate({"left":"-="+divide+"px"}, 'slow');
+					$('#button-left').show();
+					if (item === realState){
+						$("#button-right").fadeOut();
+					}
+				}
+				
+				function prev(){
+					realState--;
+					$('#button-right').show();
+					$(slider).stop().animate({"left":"+="+divide+"px"}, 'slow');
+					if (realState === 1){
+						$('#button-right').fadeOut();
+					}
+				}
+				$('#button-right').on('click', function(e){
+					e.preventDefault();
+					next();
+				});
+
+				$('#button-left').on('click', function(a){
+					a.preventDefault();
+					prev();
+				});
+
+				
+				
+				$(slider).on( "swipeleft", next);
+				$(slider).on("swiperight", prev);
+			}	
+			slider();
+		
+	</script>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+.wrapper{
+
+}
+.content{
+
+}
+#mycarousel{
+	margin: 0 auto;
+	/*height: 300px;*/
+	overflow: hidden;
+	position: relative;
+}
+.everslider{
+
+}
+#slide-container{
+	margin: 0;
+	padding: 0;
+	position: relative;
+	left: 0;
+}
+#mycarousel .es-slide .item-slide{
+	float: left;
+	list-style-type: none;
+	/*height: 500px;*/
+}	
+#mycarousel .es-slide .item-slide img {
+	width: 100%;
+}
+#mycarousel .es-slide .item-slide .caption{
+	position: absolute;
+	top:0;
+	width: 80%;
+	/*background-color: rgba(255, 255, 255, 0.5);
+	width: 100%;
+	height: 50px;*/
+}
+#mycarousel .es-slide .item-slide .caption .item-info {
+	text-decoration: none;
+	color:#fff;
+	text-align: center;
+}
+#mycarousel .hidden-button{
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	position: absolute;
+	z-index: 200;
+}
+#mycarousel #button-left{
+	left: 0;
+}
+#mycarousel #button-right{
+	right: 0;
+}
+#carousel-info{
+	position: absolute;
+	top:0;
+	width: 100%;
+	height: auto;
+}
+.content-carousel {
+	display: none;
+}
