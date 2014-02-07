@@ -149,12 +149,12 @@ html, body {
 	/*margin-left: 0% !important;*/
 }
 #navdots{
-	width: 200px;
+	width: 150px;
 	height: 30px;
-	position: absolute; 
-	bottom:20px;
-	background-color: red;
+	position: relative;
+	bottom: 50px;
 	z-index: 200;
+	margin: 0 auto;
 }
 #navdots .navdots_list{
 	margin: 0 auto;
