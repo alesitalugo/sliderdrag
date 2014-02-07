@@ -62,3 +62,30 @@
 .content-carousel {
 	display: none;
 }
+
+#navdots{
+	width: 200px;
+	height: 30px;
+	position: absolute; 
+	bottom:20px;
+	z-index: 200;
+}
+#navdots .navdots_list{
+	margin: 0 auto;
+	text-align: center;
+	list-style-type: none;
+	display: inline;
+}
+#navdots .navdots_list .dot {
+	margin: 5px;
+	width: 5px;
+	height: 5px;
+	background-color: #fff;
+	padding: 5px;
+	border-radius: 0.5em;
+	float: left;
+
+}
+#navdots .navdots_list .active{
+	background-color: #000;
+}

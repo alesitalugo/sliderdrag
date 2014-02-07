@@ -148,7 +148,24 @@ html, body {
 .img_slide {
 	/*margin-left: 0% !important;*/
 }
+#navdots{
+	width: 200px;
+	height: 30px;
+	position: absolute; 
+	bottom:20px;
+	background-color: red;
+	z-index: 200;
+}
+#navdots .navdots_list{
+	margin: 0 auto;
+	text-align: center;
+}
+#navdots .navdots_list .dot {
+	margin: 5px;
+	width: 10px;
+	height: 10px;
 
+}
 /*RESPONSIVE*/
 /*
 @media screen and (min-device-width: 856px){
