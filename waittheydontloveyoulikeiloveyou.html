@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">		
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.5">
+ 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqpTqF9BkwoyCJvX9eaqcIBwKxdOO1l7g&sensor=true"></script>	
+    	
+		<style>
+			#map-canvas{
+				width: 500px;
+				height: 300px;
+			}
+			#accordion_menu{
+				margin: 0 auto;
+				text-align: center;
+				width: 702px;
+			}
+			#accordion-items{
+				list-style: none; 
+				margin: 0; 
+				padding: 0; 
+				height: 400px;
+				position: relative;
+			}
+			#accordion-items .item-menu {
+				float: left; 
+				height: 400px; 
+				width: 50px; 
+				overflow: hidden;
+				position: relative;
+			}
+			#accordion-items .menu {
+				height: 400px;
+			}
+			#accordion-items .active {
+				width: 450px;
+			}
+			#accordion-items .item-menu h2 {
+				width: 50px; 
+				height: 0; 
+				overflow: hidden; 
+				padding: 400px 0 0; 
+				float: left;
+			}
+			#accordion-items img{
+				width: 100%;
+				height: 100%;
+			}
+			#accordion-items .item-menu h2 span {
+				display: block;
+				width: 50px; 
+				height: 0; 
+				overflow: hidden; 
+				padding: 400px 0 0; 
+				position: absolute; 
+				top: 0; 
+				right: 0;
+			}
+			#accordion-items .item-menu.item-one h2 {
+				background: red;
+			}
+			#accordion-items .item-menu.item-two h2 {
+				background: green;
+			}
+			#accordion-items .item-menu.item-three h2 {
+				background: blue;
+			}
+			#accordion-items .item-menu.item-four h2 {
+				background: red;
+			}
+			#accordion-items .item-menu.item-five h2 {
+				background: green;
+			}
+			#accordion-items .item-menu.item-six h2 {
+				background: blue;
+			}
+
+			#accordion-items .item-menu section {width: 450px; float: left; height: 400px; }
+			.description{
+				position: relative;
+			
+				width: 0%;
+				bottom: 94px;
+				background: rgba(239, 135, 44, 0.7);
+				display: none;
+			}
+			#accordion-items .active .description{
+				display: block;
+				width: 100%;
+			}
+			.description p{
+				margin: 10px;
+				text-align: justify;
+				color: #fff;
+				font-size: 12px;
+				padding: 5px;
+			}
+			#accordion-items .icon {
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				left: 0;
+				color:rgb(239, 135, 44);
+				font-size: 20px;
+				margin: 5px;
+			}
+		</style>
+		
+	</head>
+	<body onload="initialize()">
+	
+		<!--PLUGIN FOR FOURSQUARE WITH JSON AND JAVASCRIPT -->
+		<input type="hidden" id="lat" value="">
+		<input type="hidden" id="lng" value=""> 
+	
+		<div id="map-canvas">
+		</div>
+		<script type="text/javascript">
+
+			var args = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=SDXI5NXX10EI3VX5U5ABLDDVRMMY21IILJUOIJ1XCT0R0AHH&v=20140210"
+
+    		
+    		for(i= 0; i<args.length; i++){
+    			var obj = args[i];
+    			for( var key in obj){
+    				var attrName = key;
+            		var attrValue = obj[key];
+    			}
+    			
+    		}	
+				$.getJSON(args, function(data) {
+						console.log(data);
+					   	lng = data.response.checkins.items[0].venue.location.lng;
+					    lat = data.response.checkins.items[0].venue.location.lat;
+
+					var getLat = document.getElementById("lat").value = lat;
+
+					var getLng = document.getElementById("lng").value = lng;
+				});
+ 				
+			var latData = $('#lat').val();
+ 			var lngData = $('#lng').val();
+ 						console.log(latData, lngData);
+ 				
+			var map;
+
+			var mx = {};
+			mx.lat = 19.465297;
+            mx.lon = -99.132132;
+			var defaultLatlng = new google.maps.LatLng(latData,lngData); 
+ 			function initialize(){
+
+ 				
+ 				var mapInfo = function(pos, mapa, name, address){
+ 					infoOptions = {},
+ 					info
+ 				}
+
+			   	var mapOptions = {
+			   		center: defaultLatlng,
+          			zoom: 12
+			   	}
+			   		var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+		   	}
+
+			// maps function 
+			
+		    lastBlock = $("#a1");
+		    maxWidth = 64;
+		    minWidth = 50;    
+	
+			//google.maps.event.addDomListener(window, 'load', initMaps);
+
+		    $("li").click(function(){
+		    	$('#accordion-items .active').removeClass('active');
+		        $(lastBlock).animate({width: minWidth+"px"}, { queue:false, duration:400 });
+		        $(this).animate({width: maxWidth+"%"}, { queue:false, duration:400});
+		        $(this).addClass('active');
+		        lastBlock = this;
+		      });
+
+		</script>	
+	</body>
+</html>

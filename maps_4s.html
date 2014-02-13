@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">		
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css">		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.5">
+ 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqpTqF9BkwoyCJvX9eaqcIBwKxdOO1l7g&sensor=true"></script>	
+    	
+		<style>
+			#map-canvas{
+				width: 500px;
+				height: 300px;
+			}
+		
+		</style>
+		
+	</head>
+	<body onload="initialize()">
+	
+		<!--PLUGIN FOR FOURSQUARE WITH JSON AND JAVASCRIPT -->
+		<input type="hidden" id="lat" value="">
+		<input type="hidden" id="lng" value=""> 
+		<h2></h2>
+		<div id="map-canvas">
+		</div>
+		<script type="text/javascript">
+
+			var args = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=SDXI5NXX10EI3VX5U5ABLDDVRMMY21IILJUOIJ1XCT0R0AHH&v=20140210"
+
+    		
+    		for(i= 0; i<args.length; i++){
+    			var obj = args[i];
+    			for( var key in obj){
+    				var attrName = key;
+            		var attrValue = obj[key];
+    			}
+    		}	
+    		var checkin_location = {};
+ 				
+			var map;
+
+ 			function initialize( defaultLatlng ){
+
+ 				var styles = [
+				    {
+				      stylers: [
+				        { hue: "#FFD01B" },
+				        { saturation: 100 }
+				      ]
+				    },{
+				      featureType: "road",
+				      elementType: "geometry",
+				      stylers: [
+				        { lightness: 200 },
+				        { visibility: "simplified" },
+				        { hue: "#EC4F0F" }
+				      ]
+				    },{
+				    	featureType: "transit",
+				    	elementType: "geometry",
+				    	stylers: [
+				    		{hue: "#FF9200"},
+				    		{saturation: 50} 
+				    	]
+				    },{
+				    	featureType: "all",
+				    	elementType: "labels.text",
+				    	stylers: [
+				    		{hue: "#FF9200"},
+				    		{saturation: 50}
+				    	]
+				    },{
+				    	featureType: "all",
+				    	elementType: "labels.icon", 
+				    	stylers:[
+				    		{hue: "#EC4F0F"},
+				    		{saturation: 20}
+				    	]
+				    }
+				  ];
+				var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});
+
+			   	var mapOptions = {
+			   		center: defaultLatlng,
+          			zoom: 17,          			
+      				mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+    			
+			   	}
+			   	var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+			   	var opcionesMarca = {
+			   		position: defaultLatlng,
+			   		map: map,
+			   		title: "Coordenadas del checkin"
+			   	};
+			   	var marca = new google.maps.Marker(opcionesMarca);
+			   	 	map.mapTypes.set('map_style', styledMap);
+  					map.setMapTypeId('map_style');
+		   	}
+
+			var request = $.ajax({
+				url: args,
+				dataType: "json",
+				success: function( data ){
+					checkin_location.lng = data.response.checkins.items[0].venue.location.lng;
+					checkin_location.lat = data.response.checkins.items[0].venue.location.lat;
+					checkin_location.nombre = data.response.checkins.items[0].venue.name;
+					console.log(data);
+					var defaultLatlng = new google.maps.LatLng(checkin_location.lat,checkin_location.lng); 
+					initialize( defaultLatlng );
+					$("h2").text(checkin_location.nombre);
+				} 
+			});
+
+			// maps function 
+			
+		    lastBlock = $("#a1");
+		    maxWidth = 64;
+		    minWidth = 50;    
+	
+			//google.maps.event.addDomListener(window, 'load', initMaps);
+
+		    $("li").click(function(){
+		    	$('#accordion-items .active').removeClass('active');
+		        $(lastBlock).animate({width: minWidth+"px"}, { queue:false, duration:400 });
+		        $(this).animate({width: maxWidth+"%"}, { queue:false, duration:400});
+		        $(this).addClass('active');
+		        lastBlock = this;
+		      });
+
+		</script>	
+	</body>
+</html>
